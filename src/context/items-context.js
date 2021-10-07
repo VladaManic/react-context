@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 
 const ItemsContext = createContext({
-	items: [
-	],
+	items: [],
+	addItem: (item) => {},
 });
 
 export function ItemsContextProvider(props){
@@ -17,8 +17,15 @@ export function ItemsContextProvider(props){
 		text: 'text 2'
 	}])
 
+	function addItemHandler(currentItem){
+		setCurrentItems((prevCurrentItems) => {
+			return prevCurrentItems.concat(currentItem);
+		});
+	}
+
 	const context = {
 		items: currentItems,
+		addItem: addItemHandler,
 	} 
 
 	return (

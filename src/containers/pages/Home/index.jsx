@@ -10,7 +10,11 @@ const Home = () => {
 			<h2>Home</h2>
 			<div>
 				{itemsCtx.items.map((item) => (
-					<p>{item.title}</p>
+					<div key={item.id}>
+						<p>{item.id}</p>
+						<p>{item.title}</p>
+						<p>{item.text}</p>
+					</div>
 				))}
 			</div>
 		</div>
