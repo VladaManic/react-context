@@ -1,23 +1,21 @@
-import React, {useContext, useEffect} from 'react'
-
+import React, {useContext, useEffect} from 'react';
 import ItemsContext from '../../../context/items-context';
 
+import ItemTitle from '../../../shared/components/ItemTitle';
+
 const Home = () => {
-	const itemsCtx = useContext(ItemsContext);
+	const itemsCtx = useContext(ItemsContext)
 
 	useEffect(() => {
 		itemsCtx.getItems()
-	}, [])
+	}, [itemsCtx])
 
 	return (
 		<div>
-			<h2>Home</h2>
+			<h2>Items</h2>
 			<div>
 				{itemsCtx.items.map((item) => (
-					<div key={item.id}>
-						{item.title}
-						{item.text}
-					</div>
+					<ItemTitle key={item.id} singleItem={item} />
 				))}
 			</div>
 		</div>

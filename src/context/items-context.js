@@ -28,9 +28,6 @@ export function ItemsContextProvider(props){
 	}
 
 	const addItemHandler = (currentItem) => {
-		setCurrentItems((prevCurrentItems) => {
-			return prevCurrentItems.concat(currentItem);
-		});
 		fetch(
       'https://react-context-9849b-default-rtdb.firebaseio.com/items.json',
       {
@@ -41,6 +38,9 @@ export function ItemsContextProvider(props){
         }
       }
     )
+		setCurrentItems((prevCurrentItems) => {
+			return prevCurrentItems.concat(currentItem);
+		});
 	}
 
 	const context = {
