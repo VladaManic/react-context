@@ -1,9 +1,13 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 
 import ItemsContext from '../../../context/items-context';
 
 const Home = () => {
 	const itemsCtx = useContext(ItemsContext);
+
+	useEffect(() => {
+		itemsCtx.getItems()
+	}, [])
 
 	return (
 		<div>
@@ -11,9 +15,8 @@ const Home = () => {
 			<div>
 				{itemsCtx.items.map((item) => (
 					<div key={item.id}>
-						<p>{item.id}</p>
-						<p>{item.title}</p>
-						<p>{item.text}</p>
+						{item.title}
+						{item.text}
 					</div>
 				))}
 			</div>

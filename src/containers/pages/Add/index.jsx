@@ -9,19 +9,8 @@ const Add = () => {
 
 	const submit = (e) => {
 		e.preventDefault()
-		const id = Math.floor(Math.random() * 10000) + 1
-		const item = {id, title, text}
+		const item = {title, text}
 		itemsCtx.addItem(item)
-		// fetch(
-    //   'https://react-context-9849b-default-rtdb.firebaseio.com/items.json',
-    //   {
-    //     method: 'POST',
-    //     body: JSON.stringify(item),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }
-    // )
 	}
 
 	return (
