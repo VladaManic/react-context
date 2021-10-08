@@ -57,7 +57,7 @@ export function ItemsContextProvider(props){
     )
 		setCurrentItems(
       currentItems.map((current) =>
-        current.id === obj.id ? { ...current, text: obj.text, title: obj.title } : current
+        current.id === obj.id ? { ...current, text: obj.createdItem.text, title: obj.createdItem.title } : current
       )
     )
 	}
