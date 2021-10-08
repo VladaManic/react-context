@@ -12,9 +12,9 @@ const Single = () => {
 		fetch(
 			`https://react-context-9849b-default-rtdb.firebaseio.com/items/${id}.json`
 		).then((response) => {
-			return response.json();
+			return response.json()
 		}).then((data) => {
-			setSingleItem(data);
+			setSingleItem(data)
 		})
 		// const newObj = itemsCtx.items.filter(obj => obj.id === id)
 		// setSingleItem(newObj[0]);
@@ -24,15 +24,23 @@ const Single = () => {
 
 	//Enabling editing input fields in form
 	function handleInputChange(e){
-		const target = e.target;
-		const value = target.value;
-		const name = target.name;
-		setSingleItem({...singleItem, [name]: value});
+		const target = e.target
+		const value = target.value
+		const name = target.name
+		setSingleItem({...singleItem, [name]: value})
+	}
+
+	const onSubmit = (e) => {
+		e.preventDefault()
+		const text = singleItem.text
+		const title = singleItem.title
+		const createdItem = {text, title}
+		itemsCtx.updateItem({id, createdItem})
 	}
 
 	return (
 		<div>
-			<form>
+			<form onSubmit={onSubmit}>
 				<div>
 					<input type="text" value={singleItem.title} name="title" onChange={(e) => handleInputChange(e)} />
 				</div>

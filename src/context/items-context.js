@@ -4,6 +4,7 @@ const ItemsContext = createContext({
 	items: [],
 	getItems: () => {},
 	addItem: (item) => {},
+	updateItem: (obj) => {},
 });
 
 export function ItemsContextProvider(props){
@@ -43,10 +44,25 @@ export function ItemsContextProvider(props){
 		});
 	}
 
+	const updateItemHandler = (obj) => {
+		console.log(obj);
+		fetch(
+      `https://react-context-9849b-default-rtdb.firebaseio.com/items/${obj.id}.json`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(obj.createdItem),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+	}
+
 	const context = {
 		items: currentItems,
 		getItems: getItemsHandler,
 		addItem: addItemHandler,
+		updateItem: updateItemHandler,
 	} 
 
 	return (
