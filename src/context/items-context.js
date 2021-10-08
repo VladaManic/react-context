@@ -45,7 +45,6 @@ export function ItemsContextProvider(props){
 	}
 
 	const updateItemHandler = (obj) => {
-		console.log(obj);
 		fetch(
       `https://react-context-9849b-default-rtdb.firebaseio.com/items/${obj.id}.json`,
       {
@@ -55,6 +54,11 @@ export function ItemsContextProvider(props){
           'Content-Type': 'application/json'
         }
       }
+    )
+		setCurrentItems(
+      currentItems.map((current) =>
+        current.id === obj.id ? { ...current, text: obj.text, title: obj.title } : current
+      )
     )
 	}
 
