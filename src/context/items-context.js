@@ -5,6 +5,7 @@ const ItemsContext = createContext({
 	getItems: () => {},
 	addItem: (item) => {},
 	updateItem: (obj) => {},
+	deleteItem: (id) => {},
 });
 
 export function ItemsContextProvider(props){
@@ -62,11 +63,21 @@ export function ItemsContextProvider(props){
     )
 	}
 
+	const deleteItemHandler = (id) => {
+		fetch(
+      `https://react-context-9849b-default-rtdb.firebaseio.com/items/${id}.json`,
+      {
+        method: 'DELETE'
+      }
+    )
+	}
+
 	const context = {
 		items: currentItems,
 		getItems: getItemsHandler,
 		addItem: addItemHandler,
 		updateItem: updateItemHandler,
+		deleteItem: deleteItemHandler,
 	} 
 
 	return (

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
 import ItemsContext from '../../../context/items-context';
 
+import DeleteBtn from '../../../shared/components/DeleteBtn'
+
 const Single = () => {
 	//getting param from URL
 	const { id } = useParams()
@@ -49,6 +51,7 @@ const Single = () => {
 				</div>
 				<div>
 					<input type="submit" value="Update" />
+					<DeleteBtn id={id} />
 				</div>
 			</form>
 		</div>

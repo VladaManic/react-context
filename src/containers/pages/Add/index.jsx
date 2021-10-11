@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-
 import ItemsContext from '../../../context/items-context';
 
 const Add = () => {
