@@ -14,7 +14,7 @@ const Home = () => {
 	return (
 		<div>
 			<h2>Items</h2>
-			{itemsCtx.loading ? <img src={Loader} alt='' /> :
+			{itemsCtx.loading ? <img src={Loader} alt="Loader" /> :
 			<div>
 				{itemsCtx.items.map((item) => (
 					<ItemTitle key={item.id} singleItem={item} />

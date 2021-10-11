@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import axios from 'axios'
 
 const ItemsContext = createContext({
 	loading: true,
@@ -14,16 +15,15 @@ export function ItemsContextProvider(props){
 	const [currentItems, setCurrentItems] = useState([])
 
 	const getItemsHandler = () => {
-		fetch(
-			'https://react-context-9849b-default-rtdb.firebaseio.com/items.json',
-		).then((response) => {
-			return response.json();
-		}).then((data) => {
+		axios({
+			method: 'GET',
+			url: 'https://react-context-9849b-default-rtdb.firebaseio.com/items.json'
+		}).then((res) => {
 			const newItems = [];
-			for(const key in data){
+			for(const key in res.data){
 				const newItem = {
 					id: key,
-					...data[key]
+					...res.data[key]
 				}
 				newItems.push(newItem)
 			}
@@ -33,16 +33,11 @@ export function ItemsContextProvider(props){
 	}
 
 	const addItemHandler = (currentItem) => {
-		fetch(
-      'https://react-context-9849b-default-rtdb.firebaseio.com/items.json',
-      {
-        method: 'POST',
-        body: JSON.stringify(currentItem),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
+		axios({
+			method: 'POST',
+      url: 'https://react-context-9849b-default-rtdb.firebaseio.com/items.json',
+      data: currentItem
+		})
 		setCurrentItems((prevCurrentItems) => {
 			return prevCurrentItems.concat(currentItem);
 		});
@@ -50,16 +45,11 @@ export function ItemsContextProvider(props){
 	}
 
 	const updateItemHandler = (obj) => {
-		fetch(
-      `https://react-context-9849b-default-rtdb.firebaseio.com/items/${obj.id}.json`,
-      {
-        method: 'PUT',
-        body: JSON.stringify(obj.createdItem),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    )
+		axios({
+			method: 'PUT',
+      url: `https://react-context-9849b-default-rtdb.firebaseio.com/items/${obj.id}.json`,
+      data: obj.createdItem
+		})
 		setCurrentItems(
       currentItems.map((current) =>
         current.id === obj.id ? { ...current, text: obj.createdItem.text, title: obj.createdItem.title } : current
@@ -69,12 +59,10 @@ export function ItemsContextProvider(props){
 	}
 
 	const deleteItemHandler = (id) => {
-		fetch(
-      `https://react-context-9849b-default-rtdb.firebaseio.com/items/${id}.json`,
-      {
-        method: 'DELETE'
-      }
-    )
+		axios({
+			method: 'DELETE',
+      url: `https://react-context-9849b-default-rtdb.firebaseio.com/items/${id}.json`
+		})
 		setCurrentItems((prevCurrentItems) => {
 			return prevCurrentItems.filter(item => item.id !== id);
 		});
