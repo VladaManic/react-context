@@ -45,7 +45,7 @@ const Single = () => {
 					<input type="text" value={singleItem !== undefined && singleItem.title} name="title" onChange={(e) => handleInputChange(e)} />
 				</div>
 				<div>
-					<textarea value={singleItem !== undefined && singleItem.title} name="text" onChange={(e) => handleInputChange(e)} />
+					<textarea value={singleItem !== undefined && singleItem.text} name="text" onChange={(e) => handleInputChange(e)} />
 				</div>
 				<div>
 					<input type="submit" value="Update" />

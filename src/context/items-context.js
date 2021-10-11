@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 
 const ItemsContext = createContext({
+	loading: true,
 	items: [],
 	getItems: () => {},
 	addItem: (item) => {},
@@ -9,6 +10,7 @@ const ItemsContext = createContext({
 });
 
 export function ItemsContextProvider(props){
+	const [currentLoading, setCurrentLoading] = useState(true)
 	const [currentItems, setCurrentItems] = useState([])
 
 	const getItemsHandler = () => {
@@ -26,6 +28,7 @@ export function ItemsContextProvider(props){
 				newItems.push(newItem)
 			}
 			setCurrentItems(newItems);
+			setCurrentLoading(false)
 		})
 	}
 
@@ -43,6 +46,7 @@ export function ItemsContextProvider(props){
 		setCurrentItems((prevCurrentItems) => {
 			return prevCurrentItems.concat(currentItem);
 		});
+		setCurrentLoading(true)
 	}
 
 	const updateItemHandler = (obj) => {
@@ -61,6 +65,7 @@ export function ItemsContextProvider(props){
         current.id === obj.id ? { ...current, text: obj.createdItem.text, title: obj.createdItem.title } : current
       )
     )
+		setCurrentLoading(true)
 	}
 
 	const deleteItemHandler = (id) => {
@@ -73,9 +78,11 @@ export function ItemsContextProvider(props){
 		setCurrentItems((prevCurrentItems) => {
 			return prevCurrentItems.filter(item => item.id !== id);
 		});
+		setCurrentLoading(true)
 	}
 
 	const context = {
+		loading: currentLoading,
 		items: currentItems,
 		getItems: getItemsHandler,
 		addItem: addItemHandler,
