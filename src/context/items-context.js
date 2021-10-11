@@ -70,6 +70,9 @@ export function ItemsContextProvider(props){
         method: 'DELETE'
       }
     )
+		setCurrentItems((prevCurrentItems) => {
+			return prevCurrentItems.filter(item => item.id !== id);
+		});
 	}
 
 	const context = {
