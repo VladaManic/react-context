@@ -8,20 +8,19 @@ const Single = () => {
 	//getting param from URL
 	const { id } = useParams()
 	const itemsCtx = useContext(ItemsContext)
-	const [ singleItem, setSingleItem ] = useState({text: '', title: ''})
+	const [ singleItem, setSingleItem ] = useState({id: '', text: '', title: ''})
 
 	useEffect(() => {
-		fetch(
-			`https://react-context-9849b-default-rtdb.firebaseio.com/items/${id}.json`
-		).then((response) => {
-			return response.json()
-		}).then((data) => {
-			setSingleItem(data)
-		})
-		// const newObj = itemsCtx.items.filter(obj => obj.id === id)
-		// setSingleItem(newObj[0]);
-		// console.log(newObj);
-		// console.log(singleItem);
+		// fetch(
+		// 	`https://react-context-9849b-default-rtdb.firebaseio.com/items/${id}.json`
+		// ).then((response) => {
+		// 	return response.json()
+		// }).then((data) => {
+		// 	setSingleItem(data)
+		// 	console.log(data);
+		// })
+		const newObj = itemsCtx.items.filter(obj => obj.id === id)
+		setSingleItem(newObj[0]);
 	}, [id])
 
 	//Enabling editing input fields in form
@@ -44,10 +43,10 @@ const Single = () => {
 		<div>
 			<form onSubmit={onSubmit}>
 				<div>
-					<input type="text" value={singleItem.title} name="title" onChange={(e) => handleInputChange(e)} />
+					<input type="text" value={singleItem !== undefined && singleItem.title} name="title" onChange={(e) => handleInputChange(e)} />
 				</div>
 				<div>
-					<textarea value={singleItem.text} name="text" onChange={(e) => handleInputChange(e)} />
+					<textarea value={singleItem !== undefined && singleItem.title} name="text" onChange={(e) => handleInputChange(e)} />
 				</div>
 				<div>
 					<input type="submit" value="Update" />
