@@ -17,7 +17,6 @@ const Single = () => {
 		// 	return response.json()
 		// }).then((data) => {
 		// 	setSingleItem(data)
-		// 	console.log(data);
 		// })
 		const newObj = itemsCtx.items.filter(obj => obj.id === id)
 		setSingleItem(newObj[0]);
